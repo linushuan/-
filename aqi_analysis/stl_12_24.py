@@ -34,8 +34,8 @@ base_output_root = os.path.join(current_dir, "output_results_v3_nodb/")
 INPUT_DIR = os.path.join(base_output_root, "anomaly_csvs")
 
 # 輸出：新的資料夾
-OUTPUT_DATA_DIR = os.path.join(base_output_root, "stl_processed_data")
-OUTPUT_REPORT_DIR = os.path.join(base_output_root, "stl_reports")
+OUTPUT_DATA_DIR = os.path.join(base_output_root, "stl_processed_data_51")
+OUTPUT_REPORT_DIR = os.path.join(base_output_root, "stl_reports_51")
 
 # 建立輸出目錄
 for d in [OUTPUT_DATA_DIR, OUTPUT_REPORT_DIR]:
@@ -48,6 +48,7 @@ for d in [OUTPUT_DATA_DIR, OUTPUT_REPORT_DIR]:
 TOLERANCE_HOURS = 2       # 容忍缺測時數 (超過此數值則視為斷點)
 STL_PERIOD = 24           # 週期 (小時資料為 24)
 STL_SEASONAL = 13         # 季節平滑參數 (通常為奇數，13 是常用預設值)
+STL_trend = 51 #37
 
 # ===============================================================
 #   核心處理函式
@@ -99,7 +100,7 @@ def process_series_stl(series, site, item, filename):
     # 資料長度至少要是週期的兩倍才能算
     if len(series_for_stl) > STL_PERIOD * 2:
         try:
-            stl = STL(series_for_stl, period=STL_PERIOD, seasonal=STL_SEASONAL)
+            stl = STL(series_for_stl, period=STL_PERIOD, seasonal=STL_SEASONAL, trend = STL_trend)
             res = stl.fit()
 
             # 核心公式：移除季節性 = 原始值 - 季節性成分

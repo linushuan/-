@@ -27,8 +27,8 @@ from tqdm import tqdm
 current_dir = os.path.dirname(os.path.abspath(__file__))
 base_output_root = os.path.join(current_dir, "output_results_v3_nodb/")
 
-INPUT_DIR = os.path.join(base_output_root, "stl_processed_data")
-OUTPUT_IMG_DIR = os.path.join(base_output_root, "stl_plots")
+INPUT_DIR = os.path.join(base_output_root, "stl_processed_data_51")
+OUTPUT_IMG_DIR = os.path.join(base_output_root, "stl_plots_51")
 
 # 區域定義 (用於歸類測站)
 areas = {
